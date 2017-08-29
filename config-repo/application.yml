@@ -8,3 +8,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@eureka-server:8762/eureka/
+security:
+  user:
+    name: user
+    password: ${CONFIG_SERVER_PASSWORD:password}
