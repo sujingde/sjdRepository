@@ -1,0 +1,10 @@
+eureka:
+  instance:
+    hostname: eureka-server
+    prefer-ip-address: true
+    metadata-map:
+      user.name: ${security.user.name}
+      user.password: ${security.user.password}
+  client:
+    service-url:
+      defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@eureka-server:8762/eureka/
