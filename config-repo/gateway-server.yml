@@ -1,2 +1,8 @@
 server:
   port: 8060
+zuul:
+  ignoredServices: '*'
+  routes:
+    demo-service:
+      path: /demo/**
+      sensitiveHeaders:
