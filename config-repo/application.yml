@@ -2,6 +2,8 @@ spring:
   cloud:
     config:
       profile: prod
+  profiles:
+    active: prod
 eureka:
   instance:
     hostname: eureka-server
