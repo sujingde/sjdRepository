@@ -5,4 +5,5 @@ zuul:
   routes:
     demo-service:
       path: /demo/**
-
+      stripPrefix: false
+      sensitiveHeaders:
