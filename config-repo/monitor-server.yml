@@ -17,4 +17,4 @@ spring:
         endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents,hystrix.stream
       turbine:
         clusters: default
-        location: http://monitor:${turbine.stream.port}
+        location: http://monitor-server:${turbine.stream.port}
