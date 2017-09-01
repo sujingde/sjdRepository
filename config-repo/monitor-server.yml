@@ -3,11 +3,11 @@ logging:
     org.springframework.cloud.netflix.zuul.filters.post.SendErrorFilter: error
 
 server:
-  port: 8040
+  port: 8010
 
 turbine:
   stream:
-    port: 8041
+    port: 8011
 
 eureka:
   instance:
