@@ -1,3 +1,7 @@
+logging:
+  level:
+    org.springframework.cloud.netflix.zuul.filters.post.SendErrorFilter: error
+
 server:
   port: 8040
 
@@ -5,21 +9,29 @@ turbine:
   stream:
     port: 8041
 
+eureka:
+  instance:
+    hostname: registry
+    prefer-ip-address: true
+    metadata-map:
+      user.name: ${security.user.name}
+      user.password: ${security.user.password}
+  client:
+    service-url:
+      defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@registry:8761/eureka/
+
 spring:
   rabbitmq:
     host: rabbitmq
-#    port: 15672
-#    username: guest
-#    password: guest
   boot:
     admin:
       routes:
         endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents,hystrix.stream
       turbine:
-        clusters: main
+        clusters: default
         location: http://monitor-server:${turbine.stream.port}
-#turbine:
-#  app-config: demo-server,gateway-server   ##需要监控的服务名
-#  aggregator:
-#    clusterConfig: main ##需要监控的服务集群名
-#  clusterNameExpression: metadata['cluster']
+
+security:
+  user:
+    name: admin
+    password: ${MONITOR_SERVER_PASSWORD:admin}
