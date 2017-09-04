@@ -4,6 +4,18 @@
 #      profile: prod
 #  profiles:
 #    active: prod
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+  config:
+    stream:
+      maxConcurrentConnections: 50
+
 eureka:
   instance:
     hostname: eureka-server
