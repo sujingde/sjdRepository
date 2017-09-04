@@ -4,6 +4,9 @@
 #      profile: prod
 #  profiles:
 #    active: prod
+feign:
+  hystrix:
+    enabled: true
 
 hystrix:
   command:
