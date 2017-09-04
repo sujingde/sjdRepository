@@ -3,11 +3,11 @@ logging:
     org.springframework.cloud.netflix.zuul.filters.post.SendErrorFilter: error
 
 server:
-  port: 8010
+  port: 8020
 
 turbine:
   stream:
-    port: 8011
+    port: 8021
   app-config: demo-server   ##需要监控的服务名
   aggregator:
     clusterConfig: main ##需要监控的服务集群名
