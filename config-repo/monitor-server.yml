@@ -30,6 +30,12 @@ spring:
       turbine:
         clusters: default
         location: http://monitor-server:${turbine.stream.port}
+ 
+turbine:
+  app-config: demo-server   ##需要监控的服务名
+  aggregator:
+    clusterConfig: main ##需要监控的服务集群名
+  clusterNameExpression: metadata['cluster']
 
 security:
   user:
