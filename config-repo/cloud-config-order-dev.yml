@@ -6,7 +6,7 @@ management:
 eureka:
   client:
     service-url:
-      defaultZone: 'http://eureka1:8763/eureka/,http://eureka2:8762/eureka/'
+      defaultZone: 'http://192.168.8.107:8763/eureka/,http://192.168.8.107:8762/eureka/'
   instance:
     metadata-map:
       cluster: prontera
@@ -22,14 +22,14 @@ spring:
   application:
     name: order
   datasource:
-    username: chris
-    password: 123123
+    username: root
+    password: root
     url: 'jdbc:mysql://solar_mysql:3306/order?useLegacyDatetimeCode=false&serverTimezone=Asia/Hong_Kong&useSSL=false'
   rabbitmq:
     host: rabbitmq
-    username: chris
-    password: 123123
-    virtual-host: prontera
+    username: hcb
+    password: hcb
+    virtual-host: /
     listener:
       retry:
         enabled: true
@@ -49,19 +49,14 @@ spring:
         service-id: 'config-server'
       fail-fast: true
   zipkin:
-    base-url: 'http://zipkin_server:9411/'
-encrypt:
-  key: '*&3loa#@9no_0*(!'
-mybatis:
-  type-handlers-package: 'com.github.prontera.domain.type.handler'
-  mapper-locations: 'classpath*:mapper/**/*Mapper.xml'
-  type-aliases-package: 'com.github.prontera.domain'
+    base-url: http://192.168.8.107:9411
 ribbon:
   MaxAutoRetries: 1
   MaxAutoRetriesNextServer: 3
   OkToRetryOnAllOperations: true
   ConnectTimeout: 1500
   ReadTimeout: 2000
+
 hystrix:
   command:
     default:
@@ -69,7 +64,11 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 2000
-flyway:
-  enabled: true
-  baseline-on-migrate: true
-  validate-on-migrate: false
+            
+
+mybatis:
+  type-handlers-package: 'com.xbwl.type.handler'
+  mapper-locations: 'classpath*:mapper/*Mapper.xml'
+  type-aliases-package: 'com.xbwl.domain'
+
+
