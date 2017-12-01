@@ -4,6 +4,9 @@ spring:
 
   session:
     store-type: none
+  
+  zipkin:
+    base-url: 'http://192.168.18.172:9411/'
 
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
