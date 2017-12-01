@@ -1,0 +1,84 @@
+spring:
+  application:
+    name: xbfuAccount
+
+  session:
+    store-type: none
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    readSize: 1
+    write:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/account?useUnicode=true&useSSL=false&zeroDateTimeBehavior=convertToNull&characterEncoding=utf-8
+      username: root
+      password: root
+      initialSize:  5
+      minIdle:  5
+      maxActive:  20
+      maxWait:  60000
+      timeBetweenEvictionRunsMillis:  60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery:  SELECT 1 FROM DUAL
+      testWhileIdle:  true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize:  20
+      filters:  stat,wall,log4j
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+server:
+  port: 8881
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+  client:
+    registry-fetch-interval-seconds: 5 #迅速获取服务注册状态
+    serviceUrl:
+      defaultZone: 'http://192.168.18.173:8762/eureka/,http://192.168.18.172:8763/eureka/'
+
+
+feign:
+  hystrix:
+    command:
+      default:
+        isolation:
+          strategy:  SEMAPHORE
+          semaphore:
+            maxConcurrentRequests:  100
+          thread:
+            timeoutInMilliseconds: 10000
+        fallback:
+          isolation:
+            semaphore:
+              maxConcurrentRequests:  100
+    enabled:  true #Hystrix支持，如果为true，hystrix库必须在classpath中
+  compression: #请求和响应GZIP压缩支持
+    request:
+      enabled:  true
+      mime-types: text/xml,application/xml,application/json  #支持压缩的mime types
+      min-request-size: 2048
+    response:
+      enabled:  true
+
+mybatis:
+  type-aliases-package: cn.xbwl.nis.domain
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+
+mapper:
+  not-empty: false
+  identity: MYSQL
+
+#指定log的配置文件，以及记录Spring Boot的log级别
+logging:
+  config: classpath:logbak.xml
+
+
+
+
+
+
+
